@@ -109,10 +109,13 @@ public class TodoUtil {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			String str;
+			int c = 0;
 			while((str = reader.readLine())!=null){
 				StringTokenizer token = new StringTokenizer(str,"##");
 				l.addItem(new TodoItem(token.nextToken(),token.nextToken(),token.nextToken()));
+				c++;
 			}
+			System.out.println(c+"개 항목을 불러왔습니다.");
 			reader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("파일을 찾지 못했습니다.");

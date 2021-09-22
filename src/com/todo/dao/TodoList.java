@@ -39,7 +39,7 @@ public class TodoList {
 		System.out.println("\n"
 				+ "[정렬]\n");
 		for (TodoItem myitem : list) {
-			System.out.println(myitem.getTitle() + myitem.getDesc());
+			System.out.println(myitem.toString());
 		}
 	}
 	
