@@ -12,10 +12,12 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
+		TodoUtil.loadList(l,"todolist.txt");
 		boolean isList = false;
 		boolean quit = false;
+		Menu.displaymenu();
 		do {
-			Menu.displaymenu();
+			Menu.displayPrompt();
 			isList = false;
 			String choice = sc.next();
 			switch (choice) {
@@ -52,16 +54,21 @@ public class TodoMain {
 				isList = true;
 				break;
 
+			case "help":
+				Menu.displaymenu();
+				break;
+
 			case "exit":
 				quit = true;
 				break;
 
 			default:
-				System.out.println("please enter one of the above mentioned command");
+				System.out.println("존재하지 않는 명령어입니다. (help를 입력해 사용가능한 명령어를 볼 수 있습니다.)");
 				break;
 			}
 			
 			if(isList) l.listAll();
 		} while (!quit);
+		TodoUtil.saveList(l,"todolist.txt");
 	}
 }
