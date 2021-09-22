@@ -28,6 +28,7 @@ public class TodoUtil {
 		
 		TodoItem t = new TodoItem(title, desc);
 		list.addItem(t);
+		System.out.println("추가되었습니다.");
 	}
 
 	public static void deleteItem(TodoList l) {
@@ -42,9 +43,11 @@ public class TodoUtil {
 		for (TodoItem item : l.getList()) {
 			if (title.equals(item.getTitle())) {
 				l.deleteItem(item);
+				System.out.println("제거되었습니다.");
 				break;
 			}
 		}
+		System.out.println("항목이 존재하지 않습니다.");
 	}
 
 
@@ -95,6 +98,7 @@ public class TodoUtil {
 			for(TodoItem item: l.getList())
 				w.write(item.toSaveString());
 			w.close();
+			System.out.println("저장되었습니다.");
 		}	catch (IOException e) {
 
 		}
