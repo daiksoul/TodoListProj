@@ -5,35 +5,8 @@ import java.util.*;
 
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
-import com.todo.service.function.*;
 
 public class TodoUtil {
-	public static ArrayList<TodoFunction> functions = new ArrayList<>(){{
-		add(new CreateItem());
-		add(new DeleteItem());
-		add(new UpdateItem());
-		add(new ListDefault());
-		add(new ListNameAsc());
-		add(new ListNameDesc());
-		add(new ListDate());
-		add(new ListDateDesc());
-		add(new Find());
-		add(new FindCate());
-		add(new Help());
-	}};
-
-	public static void runFunction(TodoList list, String... args){
-		if(args.length==1){
-			for(TodoFunction function : functions){
-				if(function.isCommand(args[0]))
-					function.run(list);
-			}
-		}else if(args.length==2){
-			TodoFunction f = functions.get(8);
-			if(f.isCommand(args[1]))
-				f.run(list);
-		}
-	};
 	
 	public static void createItem(TodoList list) {
 

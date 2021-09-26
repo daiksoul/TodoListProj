@@ -1,8 +1,5 @@
 package com.todo.menu;
 
-import com.todo.service.TodoUtil;
-import com.todo.service.function.TodoFunction;
-
 public class Menu {
     public static String[] helps = {
         "add\t- 항목 추가",
@@ -22,11 +19,8 @@ public class Menu {
     {
         System.out.println();
         int n = 1;
-//        for(String str : helps) {
-//            System.out.printf("%2d. "+str+"\n",n++);
-//        }
-        for(TodoFunction f: TodoUtil.functions){
-            System.out.printf("%2d. "+f.getCommand()+"\t- "+f.getDescription(),n++);
+        for(String str : helps) {
+            System.out.printf("%2d. "+str+"\n",n++);
         }
     }
     public static void displayPrompt() {
