@@ -2,8 +2,7 @@ package com.todo.dao;
 
 import java.util.*;
 
-import com.todo.service.TodoSortByDate;
-import com.todo.service.TodoSortByName;
+import com.todo.service.TodoSort;
 
 public class TodoList {
 	private List<TodoItem> list;
@@ -20,6 +19,10 @@ public class TodoList {
 		list.remove(t);
 	}
 
+	public void deleteItem(int index) {
+		list.remove(index);
+	}
+
 	void editItem(TodoItem t, TodoItem updated) {
 		int index = list.indexOf(t);
 		list.remove(index);
@@ -31,15 +34,16 @@ public class TodoList {
 	}
 
 	public void sortByName() {
-		Collections.sort(list, new TodoSortByName());
+		Collections.sort(list, new TodoSort.ByName());
 
 	}
 
 	public void listAll() {
 		System.out.println("\n"
 				+ "[정렬]\n");
+		int n = 1;
 		for (TodoItem myitem : list) {
-			System.out.println(myitem.toString());
+			System.out.println((n++)+". "+myitem.toString());
 		}
 	}
 	
@@ -48,7 +52,7 @@ public class TodoList {
 	}
 
 	public void sortByDate() {
-		Collections.sort(list, new TodoSortByDate());
+		Collections.sort(list, new TodoSort.ByDate());
 	}
 
 	public int indexOf(TodoItem t) {

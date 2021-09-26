@@ -7,6 +7,8 @@ public class TodoItem {
     private String title;
     private String desc;
     private String current_date;
+    private String category;
+    private String due_date;
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 
     public TodoItem(String title, String desc){
@@ -15,11 +17,22 @@ public class TodoItem {
         this.current_date= format.format(new Date());
     }
 
-    public TodoItem(String title, String desc, String date){
+    public TodoItem(String cat, String title, String desc, String date, String due){
         this.title = title;
         this.desc = desc;
         this.current_date = date;
+        this.category = cat;
+        this.due_date = due;
     }
+
+    public TodoItem(String title, String desc, String cat, String due){
+        this.title = title;
+        this.desc = desc;
+        this.category = cat;
+        this.due_date = due;
+        this.current_date = format.format(new Date());
+    }
+
     
     public String getTitle() {
         return title;
@@ -46,11 +59,31 @@ public class TodoItem {
     }
 
     public String toSaveString() {
-        return title+"##"+desc+"##"+current_date+"\n";
+        return category+"##"+title+"##"+desc+"##"+current_date+"##"+due_date+"\n";
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
+    }
+
+    public boolean containsStr(String keyw) {
+        return this.title.contains(keyw) || this.desc.contains(keyw);
     }
 
     @Override
     public String toString(){
-        return "["+title+"]\t"+desc+" - "+current_date;
+        return "["+category+"]\t\""+title+"\"\t"+desc+"\t"+due_date+" - "+current_date;
     }
 }
