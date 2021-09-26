@@ -18,8 +18,8 @@ public class TodoUtil {
 		add(new ListNameDesc());
 		add(new ListDate());
 		add(new ListDateDesc());
-		add(new Find());
-		add(new FindCate());
+		add(new FindTitleDescr());
+		add(new ListCate());
 		add(new Help());
 	}};
 
@@ -32,7 +32,7 @@ public class TodoUtil {
 				}
 			}
 		}else if(args.length==2){
-			Find f = (Find) functions.get(8);
+			FindTitleDescr f = (FindTitleDescr) functions.get(8);
 			if(f.isCommand(args[0])) {
 				f.setKeyw(args[1]);
 				f.run(list);
