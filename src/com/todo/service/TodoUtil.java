@@ -40,15 +40,26 @@ public class TodoUtil {
 	public static void deleteItem(TodoList l) {
 
 		Scanner sc = new Scanner(System.in);
-
+		String conf;
 		System.out.print("\n"
 				+ "========== 항목 제거\n"
 				+ "제거할 항목의 번호를 입력하세요. : ");
 
 		int index = sc.nextInt();
 		if(index>0&&index<=l.getList().size()) {
-			l.deleteItem(index-1);
-			System.out.println("제거되었습니다.");
+			while(true) {
+				System.out.print(index + "번 항목 (" + l.getList().get(index - 1).getTitle() + ")를 삭제하시겠습니까? <y/n> : ");
+				conf = sc.next();
+				if(conf.toLowerCase().equals("y")) {
+					l.deleteItem(index-1);
+					System.out.println("제거되었습니다.");
+					break;
+				}else if(conf.toLowerCase().equals("n")) {
+					System.out.println("취소되었습니다.");
+					break;
+				}else
+					System.out.println("y 또는 n을 입력해주세요.");
+			}
 		}
 		else
 			System.out.println("1과 "+l.getList().size()+"사이의 숫자를 입력해주세요.");
@@ -109,7 +120,19 @@ public class TodoUtil {
 			}
 			n++;
 		}
-		System.out.print("총 "+c+"개 항목을 찾았습니다.");
+		System.out.println("총 "+c+"개 항목을 찾았습니다.");
+	}
+
+	public static void searchCate(TodoList l, String keyw) {
+		int n = 1, c = 0;
+		for (TodoItem item : l.getList()) {
+			if(item.containsStrCat(keyw)){
+				System.out.println(n+". "+item.toString());
+				c++;
+			}
+			n++;
+		}
+		System.out.println("총 "+c+"개 항목을 찾았습니다.");
 	}
 
 	public static void listCat(TodoList l){

@@ -11,7 +11,8 @@ public class Menu {
         "ls_date\t- 시간순으로 정렬",
         "ls_date_desc\t- 역시간순으로 정렬",
         "find\t- 항목 검색",
-        "find_cate\t- 카테고리 표시",
+        "find_cate\t- 카테고리 검색",
+        "ls_cate\t- 카테고리 표시",
         "help\t- 명령어 표시",
         "exit 또는 ESC 키\t- 종료"
     };

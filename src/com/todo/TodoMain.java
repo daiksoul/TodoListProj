@@ -65,6 +65,10 @@ public class TodoMain {
 				break;
 
 			case "find_cate":
+				TodoUtil.searchCate(l, sc.next());
+				break;
+
+			case "ls_cate":
 				TodoUtil.listCat(l);
 				break;
 

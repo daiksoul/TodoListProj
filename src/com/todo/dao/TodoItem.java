@@ -82,6 +82,10 @@ public class TodoItem {
         return this.title.contains(keyw) || this.desc.contains(keyw);
     }
 
+    public boolean containsStrCat(String keyw) {
+        return this.category.contains(keyw);
+    }
+
     @Override
     public String toString(){
         return "["+category+"]\t\""+title+"\"\t"+desc+"\t"+due_date+" - "+current_date;
