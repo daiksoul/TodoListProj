@@ -19,67 +19,8 @@ public class TodoMain {
 		do {
 			Menu.displayPrompt();
 			isList = false;
-			String choice = sc.next();
-			switch (choice) {
-
-			case "add":
-				TodoUtil.createItem(l);
-				break;
-			
-			case "del":
-				TodoUtil.deleteItem(l);
-				break;
-				
-			case "edit":
-				TodoUtil.updateItem(l);
-				break;
-				
-			case "ls":
-				TodoUtil.listAll(l);
-				break;
-
-			case "ls_name_asc":
-				l.sortByName();
-				isList = true;
-				break;
-
-			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
-				isList = true;
-				break;
-				
-			case "ls_date":
-				l.sortByDate();
-				isList = true;
-				break;
-
-			case "ls_date_desc":
-				l.sortByDate();
-				l.reverseList();
-				isList = true;
-				break;
-
-			case "find":
-				TodoUtil.searchList(l,sc.next());
-				break;
-
-			case "find_cate":
-				TodoUtil.listCat(l);
-				break;
-
-			case "help":
-				Menu.displaymenu();
-				break;
-
-			case "exit":
-				quit = true;
-				break;
-
-			default:
-				System.out.println("존재하지 않는 명령어입니다. (help를 입력해 사용가능한 명령어를 볼 수 있습니다.)");
-				break;
-			}
+			String choice = sc.nextLine();
+			TodoUtil.runFunction(l,choice.split(" "));
 			
 			if(isList) l.listAll();
 		} while (!quit);
