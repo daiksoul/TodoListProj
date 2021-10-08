@@ -4,11 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TodoItem {
+    private int id;
     private String title;
     private String desc;
     private String current_date;
     private String category;
     private String due_date;
+    private boolean complete = false;
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 
     public TodoItem(String title, String desc){
@@ -33,7 +35,9 @@ public class TodoItem {
         this.current_date = format.format(new Date());
     }
 
-    
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
     public String getTitle() {
         return title;
     }
@@ -78,16 +82,16 @@ public class TodoItem {
         this.due_date = due_date;
     }
 
-    public boolean containsStr(String keyw) {
-        return this.title.contains(keyw) || this.desc.contains(keyw);
+    public boolean getComplete(){
+        return this.complete;
     }
 
-    public boolean containsStrCat(String keyw) {
-        return this.category.contains(keyw);
+    public void setComplete(boolean b){
+        this.complete = b;
     }
 
     @Override
     public String toString(){
-        return "["+category+"]\t\""+title+"\"\t"+desc+"\t"+due_date+" - "+current_date;
+        return id+". ["+category+"]\t\""+title+"\""+(complete?"[V]":"")+"\t"+desc+"\t"+due_date+" - "+current_date;
     }
 }

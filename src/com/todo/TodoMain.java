@@ -12,13 +12,10 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		TodoUtil.loadList(l,"todolist.txt");
-		boolean isList = false;
 		boolean quit = false;
 		Menu.displaymenu();
 		do {
 			Menu.displayPrompt();
-			isList = false;
 			String choice = sc.next();
 			switch (choice) {
 
@@ -39,25 +36,19 @@ public class TodoMain {
 				break;
 
 			case "ls_name_asc":
-				l.sortByName();
-				isList = true;
+				TodoUtil.listAll(l,"title",0);
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
-				isList = true;
+				TodoUtil.listAll(l,"title",1);
 				break;
 				
 			case "ls_date":
-				l.sortByDate();
-				isList = true;
+				TodoUtil.listAll(l,"due_date",0);
 				break;
 
 			case "ls_date_desc":
-				l.sortByDate();
-				l.reverseList();
-				isList = true;
+				TodoUtil.listAll(l,"due_date",1);
 				break;
 
 			case "find":
@@ -72,6 +63,14 @@ public class TodoMain {
 				TodoUtil.listCat(l);
 				break;
 
+			case "comp":
+				TodoUtil.completeItem(l,sc.nextInt());
+				break;
+
+			case "ls_comp":
+				TodoUtil.listComp(l);
+				break;
+
 			case "help":
 				Menu.displaymenu();
 				break;
@@ -84,9 +83,6 @@ public class TodoMain {
 				System.out.println("존재하지 않는 명령어입니다. (help를 입력해 사용가능한 명령어를 볼 수 있습니다.)");
 				break;
 			}
-			
-			if(isList) l.listAll();
 		} while (!quit);
-		TodoUtil.saveList(l,"todolist.txt");
 	}
 }
