@@ -92,6 +92,13 @@ public class TodoItem {
 
     @Override
     public String toString(){
-        return id+". ["+category+"]\t\""+title+"\""+(complete?"[V]":"")+"\t"+desc+"\t"+due_date+" - "+current_date;
+        return String.format("%2d",id)+". ["+category+"]\t\""+title+"\"\t"+(complete?"[V]":"[-]")+"\t"+desc+"\t"+due_date+" - "+current_date;
+    }
+
+    public String toShortString(){
+        String ttitle = title.length()>7?(title.substring(0,4)+".."):title;
+        String tdesc = desc.length()>10?(desc.substring(0,7)+".."):desc;
+        ttitle = "\""+ttitle+"\""+(ttitle.length()<=3?"\t":"");
+        return String.format("%2d",id)+". ["+category+"]\t"+ttitle+"\t"+(complete?"[V]":"[-]")+"\t"+tdesc+"\t"+due_date+" - "+current_date;
     }
 }

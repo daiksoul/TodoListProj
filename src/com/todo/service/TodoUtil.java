@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
+import com.todo.menu.Menu;
 
 public class TodoUtil {
 	
@@ -103,6 +104,14 @@ public class TodoUtil {
 			System.out.println("수정되었습니다.");
 	}
 
+	public static void displayItem(TodoList l, int id){
+		int c = l.getCount();
+		if(id<=0||id>c) {
+			System.out.println("1과 " + c + "사이의 숫자를 입력해주세요.");
+		}else
+			Menu.displayItem(l.getById(id));
+	}
+
 	public static void completeItem(TodoList l, int id){
 		if(l.completeItem(id)>0)
 			System.out.println("완료되었습니다.");
@@ -110,42 +119,35 @@ public class TodoUtil {
 
 	public static void listAll(TodoList l) {
 		System.out.println("[목록, 총 "+l.getCount()+"개]");
-		for (TodoItem item : l.getList()) {
-			System.out.println(item.toString());
-		}
+		for (TodoItem item : l.getList())
+			System.out.println(item.toShortString());
 	}
 
 	public static void listAll(TodoList l, String orderby, int rev){
 		System.out.println("[목록, 총 "+l.getCount()+"개]");
-		for (TodoItem item : l.getOrderedList(orderby,rev)) {
-			System.out.println(item.toString());
-		}
+		for (TodoItem item : l.getOrderedList(orderby,rev))
+			System.out.println(item.toShortString());
 	}
 
 	public static void listComp(TodoList l){
 		ArrayList<TodoItem> list = l.getListComp();
 		System.out.println("[목록, 총 "+list.size()+"개]");
-		for (TodoItem item : list) {
-			System.out.println(item.toString());
-		}
+		for (TodoItem item : list)
+			System.out.println(item.toShortString());
 	}
 
 	public static void searchList(TodoList l, String keyw) {
-		int c = 0;
-		for (TodoItem item : l.getListTitleDesc(keyw)) {
+		ArrayList<TodoItem> list = l.getListTitleDesc(keyw);
+		for (TodoItem item : list)
 			System.out.println(item.toString());
-			c++;
-		}
-		System.out.println("총 "+c+"개 항목을 찾았습니다.");
+		System.out.println("총 "+list.size()+"개 항목을 찾았습니다.");
 	}
 
 	public static void searchCate(TodoList l, String keyw) {
-		int c = 0;
-		for (TodoItem item : l.getListCat(keyw)) {
+		ArrayList<TodoItem> list = l.getListCat(keyw);
+		for (TodoItem item : list)
 			System.out.println(item.toString());
-			c++;
-		}
-		System.out.println("총 "+c+"개 항목을 찾았습니다.");
+		System.out.println("총 "+list.size()+"개 항목을 찾았습니다.");
 	}
 
 	public static void listCat(TodoList l){
@@ -161,10 +163,7 @@ public class TodoUtil {
 				w.write(item.toSaveString());
 			w.close();
 			System.out.println("저장되었습니다.");
-		}	catch (IOException e) {
-
-		}
-
+		}	catch (IOException e) { }
 	}
 
 	public static void loadList(TodoList l, String filename){
@@ -179,8 +178,6 @@ public class TodoUtil {
 			reader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("파일을 찾지 못했습니다.");
-		} catch (IOException e) {
-
-		}
+		} catch (IOException e) { }
 	}
 }

@@ -18,6 +18,9 @@ public class TodoMain {
 			Menu.displayPrompt();
 			String choice = sc.next();
 			switch (choice) {
+			case "info":
+				TodoUtil.displayItem(l,sc.nextInt());
+				break;
 
 			case "add":
 				TodoUtil.createItem(l);
@@ -52,7 +55,7 @@ public class TodoMain {
 				break;
 
 			case "find":
-				TodoUtil.searchList(l,sc.next());
+				TodoUtil.searchList(l, sc.next());
 				break;
 
 			case "find_cate":
@@ -64,7 +67,7 @@ public class TodoMain {
 				break;
 
 			case "comp":
-				TodoUtil.completeItem(l,sc.nextInt());
+				TodoUtil.completeItem(l, sc.nextInt());
 				break;
 
 			case "ls_comp":
