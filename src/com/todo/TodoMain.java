@@ -38,7 +38,7 @@ public class TodoMain {
 				TodoUtil.listAll(l);
 				break;
 
-			case "ls_name_asc":
+			case "ls_name":
 				TodoUtil.listAll(l,"title",0);
 				break;
 

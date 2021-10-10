@@ -185,6 +185,22 @@ public class TodoList {
 		return c;
 	}
 
+	public int getMaxId(){
+		Statement stmt;
+		int c = 0;
+		try{
+			stmt = conn.createStatement();
+			String sql = "select max(id) from list";
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+			c = rs.getInt("max(id)");
+			stmt.close();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return c;
+	}
+
 	public TodoItem getById(int id){
 		Statement stmt;
 		TodoItem item = null;
@@ -192,7 +208,8 @@ public class TodoList {
 			stmt = conn.createStatement();
 			String sql = "select * from list where id = "+id;
 			ResultSet rs = stmt.executeQuery(sql);
-			rs.next();
+			if(!rs.next())
+				return item;
 			item = new TodoItem(
 					rs.getString("category"),
 					rs.getString("title"),

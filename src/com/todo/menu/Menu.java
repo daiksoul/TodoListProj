@@ -9,7 +9,7 @@ public class Menu {
         "del\t- 항목 제거",
         "edit\t- 항목 수정",
         "ls\t- 모든 항목 나열",
-        "ls_name_asc\t- 제목순으로 정렬",
+        "ls_name\t- 제목순으로 정렬",
         "ls_name_desc\t- 제목역순으로 정렬",
         "ls_date\t- 시간순으로 정렬",
         "ls_date_desc\t- 역시간순으로 정렬",

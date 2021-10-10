@@ -47,12 +47,16 @@ public class TodoUtil {
 				+ "제거할 항목의 번호를 입력하세요. : ");
 
 		int index = sc.nextInt();
-		if(index>0&&index<=l.getList().size()) {
+		if(index>0&&index<=l.getMaxId()) {
 			while(true) {
+				if (l.getById(index)==null){
+					System.out.println("존재하지 않는 항목입니다.");
+					return;
+				}
 				System.out.print(index + "번 항목 (" + l.getById(index).getTitle() + ")를 삭제하시겠습니까? <y/n> : ");
 				conf = sc.next();
 				if(conf.toLowerCase().equals("y")) {
-					l.deleteItem(index-1);
+					l.deleteItem(index);
 					System.out.println("제거되었습니다.");
 					break;
 				}else if(conf.toLowerCase().equals("n")) {
@@ -63,7 +67,7 @@ public class TodoUtil {
 			}
 		}
 		else
-			System.out.println("1과 "+l.getList().size()+"사이의 숫자를 입력해주세요.");
+			System.out.println("1과 "+l.getMaxId()+"사이의 숫자를 입력해주세요.");
 	}
 
 
@@ -76,8 +80,12 @@ public class TodoUtil {
 				+ "수정할 항목의 번호를 입력하세요. :");
 		int index = sc.nextInt();
 
-		if(index<=0||index>l.getList().size()){
-			System.out.println("1과 "+l.getCount()+"사이의 숫자를 입력해주세요.");
+		if(index<=0||index>l.getMaxId()){
+			if(l.getById(index)==null){
+				System.out.println("존재하지 않는 항목입니다.");
+				return;
+			}
+			System.out.println("1과 "+l.getMaxId()+"사이의 숫자를 입력해주세요.");
 			return;
 		}
 
