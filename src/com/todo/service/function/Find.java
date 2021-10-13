@@ -3,25 +3,19 @@ package com.todo.service.function;
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 
-public abstract class Find extends TodoFunction{
-    protected String keyw;
+import java.util.List;
 
-    public void setKeyw(String str){
-        this.keyw = str;
-    }
+public abstract class Find extends MultiArgFunction {
 
-    public abstract boolean hasKeyw(TodoItem item, String str);
+    protected abstract List<TodoItem> searchedList(TodoList list);
 
     @Override
-    public void run(TodoList l){
-        int n = 1, c = 0;
-        for (TodoItem item : l.getList()) {
-            if(hasKeyw(item,keyw)){
-                System.out.println(n+". "+item.toString());
-                c++;
-            }
-            n++;
-        }
-        System.out.print("총 "+c+"개 항목을 찾았습니다.");
+    public Result run(TodoList l){
+        List<TodoItem> list = searchedList(l);
+        for (TodoItem item : list)
+            System.out.println(item.toString());
+        System.out.print("총 "+list.size()+"개 항목을 찾았습니다.");
+        arg = null;
+        return Result.SUCCESS;
     }
 }

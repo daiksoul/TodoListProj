@@ -12,15 +12,11 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		boolean quit = false;
 		Menu.displaymenu();
 		do {
 			Menu.displayPrompt();
-			isList = false;
 			String choice = sc.nextLine();
 			TodoUtil.runFunction(l,choice.split(" "));
-			
-			if(isList) l.listAll();
-		} while (!quit);
+		} while (true);
 	}
 }

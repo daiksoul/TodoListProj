@@ -3,6 +3,8 @@ package com.todo.service.function;
 import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 
+import java.util.List;
+
 public class FindTitleDescr extends Find{
     public FindTitleDescr(){
         command = "find";
@@ -11,7 +13,7 @@ public class FindTitleDescr extends Find{
     }
 
     @Override
-    public boolean hasKeyw(TodoItem item, String str) {
-        return item.getTitle().contains(str) || item.getDesc().contains(str);
+    protected List<TodoItem> searchedList(TodoList list) {
+        return list.getListTitleDesc(arg[1]);
     }
 }

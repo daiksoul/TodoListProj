@@ -2,7 +2,6 @@ package com.todo.service.function;
 
 import com.todo.dao.TodoList;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class DeleteItem extends TodoFunction{
@@ -13,7 +12,7 @@ public class DeleteItem extends TodoFunction{
     }
 
     @Override
-    public void run(TodoList l) {
+    public Result run(TodoList l) {
 
         Scanner sc = new Scanner(System.in);
         String conf;
@@ -22,12 +21,14 @@ public class DeleteItem extends TodoFunction{
                 + "제거할 항목의 번호를 입력하세요. : ");
 
         int index = sc.nextInt();
-        if(index>0&&index<=l.getList().size()) {
+        if(index>0&&index<=l.getMaxId()) {
+            if (l.getById(index)==null)
+                return Result.ITEM_NOT_FOUND;
             while(true){
-                System.out.print(index+"번 항목 ("+l.getList().get(index-1).getTitle()+")을/를 삭제하시겠습니까? <y/n> : ");
+                System.out.print(index+"번 항목 ("+l.getById(index).getTitle()+")을/를 삭제하시겠습니까? <y/n> : ");
                 conf = sc.next().toLowerCase();
                 if(conf.equals("y")) {
-                    l.deleteItem(index - 1);
+                    l.deleteItem(index);
                     System.out.println("제거되었습니다.");
                     break;
                 }else if(conf.equals("n")) {
@@ -36,8 +37,11 @@ public class DeleteItem extends TodoFunction{
                 }else
                     System.out.println("Y또는 N을 입력해주세요.");
             }
+            return Result.SUCCESS;
         }
-        else
-            System.out.println("1과 "+l.getList().size()+"사이의 숫자를 입력해주세요.");
+        else {
+            System.out.println("1과 " + l.getMaxId() + "사이의 숫자를 입력해주세요.");
+            return Result.OUT_OF_BOUND;
+        }
     }
 }

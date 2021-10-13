@@ -97,8 +97,8 @@ public class TodoItem {
 
     public String toShortString(){
         String ttitle = title.length()>7?(title.substring(0,4)+".."):title;
-        String tdesc = desc.length()>10?(desc.substring(0,7)+".."):desc;
+        String tdesc = desc.length()>12?(desc.substring(0,9)+".."):desc;
         ttitle = "\""+ttitle+"\""+(ttitle.length()<=3?"\t":"");
-        return String.format("%2d",id)+". ["+category+"]\t"+ttitle+"\t"+(complete?"[V]":"[-]")+"\t"+tdesc+"\t"+due_date+" - "+current_date;
+        return String.format("%2d",id)+". ["+category+"]\t"+ttitle+"\t"+(complete?"[V]":"[-]")+"\t"+String.format("%-12s\t",tdesc)+due_date+" - "+current_date;
     }
 }

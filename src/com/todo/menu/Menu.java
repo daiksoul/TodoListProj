@@ -1,6 +1,8 @@
 package com.todo.menu;
 
 import com.todo.dao.TodoItem;
+import com.todo.service.TodoUtil;
+import com.todo.service.function.TodoFunction;
 
 public class Menu {
     public static void displaymenu()
@@ -9,7 +11,7 @@ public class Menu {
         int n = 1;
 
         for(TodoFunction f: TodoUtil.functions){
-            System.out.printf("%2d. "+f.getCommand()+"\t- "+f.getDescription(),n++);
+            System.out.printf("%2d. "+f.getCommand()+"\t- "+f.getDescription()+"\n",n++);
         }
     }
     public static void displayPrompt() {
