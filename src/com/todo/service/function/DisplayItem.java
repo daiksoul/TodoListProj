@@ -21,7 +21,7 @@ public class DisplayItem extends MultiArgFunction{
         }
 
         if(index<1||index>l.getMaxId()){
-            System.out.println("1과 "+l.getMaxId()+"사이의 숫자를 입력해주세요.");
+            System.out.println(l.getMinId() + " ~ "+l.getMaxId()+"사이의 숫자를 입력해주세요.");
             return Result.OUT_OF_BOUND;
         }
 

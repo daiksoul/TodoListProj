@@ -177,6 +177,8 @@ public class TodoUtil {
 		add(new ListCate());
 		add(new FindTitleDescr());
 		add(new FindCate());
+		add(new ImportItems());
+		add(new ExportItems());
 		add(new Help());
 		add(new Exit());
 	}};

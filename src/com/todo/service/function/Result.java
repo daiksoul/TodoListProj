@@ -11,6 +11,7 @@ public enum Result {
     SQL_ERROR(),
     ARGUMENT_MISSING("매개변수가 부족합니다."),
     WRONG_FORMAT("잘못된 형식입니다."),
+    FILE_NOT_FOUND("파일을 찾지 못했습니다."),
     ;
 
     private String message;

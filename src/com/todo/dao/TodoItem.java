@@ -1,10 +1,13 @@
 package com.todo.dao;
 
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TodoItem {
-    private int id;
+    private transient int id;
     private String title;
     private String desc;
     private String current_date;
@@ -12,6 +15,7 @@ public class TodoItem {
     private String due_date;
     private boolean complete = false;
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+    private static final Gson gson = new Gson();
 
     public TodoItem(String title, String desc){
         this.title=title;
@@ -100,5 +104,13 @@ public class TodoItem {
         String tdesc = desc.length()>12?(desc.substring(0,9)+".."):desc;
         ttitle = "\""+ttitle+"\""+(ttitle.length()<=3?"\t":"");
         return String.format("%2d",id)+". ["+category+"]\t"+ttitle+"\t"+(complete?"[V]":"[-]")+"\t"+String.format("%-12s\t",tdesc)+due_date+" - "+current_date;
+    }
+
+    public String toJson(){
+        return gson.toJson(this,TodoItem.class);
+    }
+
+    public static TodoItem fromJson(JsonReader jr){
+        return gson.fromJson(jr,TodoItem.class);
     }
 }

@@ -1,0 +1,14 @@
+[
+	{"title":"개발","desc":"라이딩 컨피그에 소리옵션 추가","current_date":"2021/09/26 22:09:32","category":"취미","due_date":"2021/09/28","complete":true},
+	{"title":"김치코인","desc":"가격 책정 식 완성하여 구현하기","current_date":"2021/09/26 22:20:07","category":"취미","due_date":"2021/10/14","complete":true},
+	{"title":"데구과제","desc":"stack 예시문제 전부 실습해보기","current_date":"2021/09/26 22:22:13","category":"공부","due_date":"2021/09/29","complete":false},
+	{"title":"드라이클린","desc":"셔츠 세탁소에 맡기기","current_date":"2021/09/26 22:17:28","category":"기타","due_date":"2021/10/03","complete":false},
+	{"title":"모델","desc":"받은모델 내구도 할당 및 스킨 컨피그 설정","current_date":"2021/09/26 22:19:25","category":"취미","due_date":"2021/10/08","complete":true},
+	{"title":"새내기밥고","desc":"점심약속","current_date":"2021/09/26 20:56:36","category":"기타","due_date":"2021/09/27","complete":true},
+	{"title":"실프과제","desc":"프로젝트 2번째 업데이트","current_date":"2021/09/26 20:55:59","category":"공부","due_date":"2021/09/26","complete":false},
+	{"title":"이산과제","desc":"수열 문제풀이하기","current_date":"2021/09/26 22:16:18","category":"공부","due_date":"2021/09/29","complete":false},
+	{"title":"택배","desc":"동생 택배 집으로 배송","current_date":"2021/09/26 22:24:50","category":"기타","due_date":"2021/10/12","complete":true},
+	{"title":"트레이싱","desc":"받은이미지 벡터 변환","current_date":"2021/09/26 21:56:03","category":"취미","due_date":"2021/09/30","complete":false},
+	{"title":"Teamcity","desc":"github과 ci/cd연동완료","current_date":"2021/10/08 11:15:42","category":"취미","due_date":"2021/10/09","complete":true},
+	{"title":"팀모임","desc":"가족주관 팀모임 컨텐츠 준비","current_date":"2021/10/10 22:32:03","category":"기타","due_date":"2021/11/21","complete":true}
+]

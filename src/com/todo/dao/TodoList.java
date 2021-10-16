@@ -1,10 +1,13 @@
 package com.todo.dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.todo.service.DbConnect;
 
 public class TodoList {
@@ -55,15 +58,17 @@ public class TodoList {
 		return c;
 	}
 
-	public int deleteItem(int index) {
+	public int deleteItem(int... ids) {
 		String sql = "delete from list where id = ?";
-		PreparedStatement ppstmt;
+		String[] strs = new String[ids.length];
+		for (int i = 0; i < ids.length; i++)
+			strs[i] = "id = " + ids[i];
+		sql += String.join(" or ", strs);
 		int c = 0;
 		try{
-			ppstmt = conn.prepareStatement(sql);
-			ppstmt.setString(1,""+index);
-			c = ppstmt.executeUpdate();
-			ppstmt.close();
+			Statement stmt = conn.createStatement();
+			c = stmt.executeUpdate(sql);
+			stmt.close();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
@@ -201,6 +206,22 @@ public class TodoList {
 		return c;
 	}
 
+	public int getMinId(){
+		Statement stmt;
+		int c = 0;
+		try{
+			stmt = conn.createStatement();
+			String sql = "select min(id) from list";
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+			c = rs.getInt("min(id)");
+			stmt.close();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return c;
+	}
+
 	public TodoItem getById(int id){
 		Statement stmt;
 		TodoItem item = null;
@@ -226,12 +247,16 @@ public class TodoList {
 		return item;
 	}
 
-	public int completeItem(int id){
+	public int completeItem(int... ids){
 		Statement stmt;
+		String sql = "update list set is_completed=1 where ";
+		String[] strs = new String[ids.length];
+		for(int i = 0; i<ids.length; i++)
+			strs[i] = "id = "+ids[i];
+		sql += String.join(" or ",strs);
 		int c = 0;
 		try{
 			stmt = conn.createStatement();
-			String sql = "update list set is_completed=1 where id = "+id;
 			c = stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (SQLException throwables) {
@@ -254,6 +279,65 @@ public class TodoList {
 			throwables.printStackTrace();
 		}
 		return c>0;
+	}
+
+	public int exportJson(String filename, int... ids){
+		Statement stmt;
+		String sql = "select * from list where ";
+
+		int c = 0;
+
+		if(ids.length>0) {
+			String[] strs = new String[ids.length];
+			for (int i = 0; i < ids.length; i++)
+				strs[i] = "id = " + ids[i];
+			sql += String.join(" or ", strs);
+		}
+		else
+			sql = "select * from list";
+
+		ArrayList<TodoItem> list = new ArrayList<>();
+
+		try{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+
+			listFromRS(list,rs);
+			JsonWriter jw = new JsonWriter(new FileWriter(filename));
+			jw.setIndent("\t");
+			jw.beginArray();
+			for(TodoItem item: list) {
+				jw.jsonValue(item.toJson());
+				c++;
+			}
+			jw.endArray();
+			jw.flush();
+			jw.close();
+		}catch (SQLException | IOException e){
+			e.printStackTrace();
+		}
+		return c;
+	}
+
+	public int importJson(String filename){
+		Gson gson = new Gson();
+		int c = 0;
+
+		try{
+			FileReader fr = new FileReader(filename);
+			JsonReader jr = gson.newJsonReader(fr);
+
+			jr.beginArray();
+			while (jr.hasNext()) {
+				addItem(TodoItem.fromJson(jr));
+				c++;
+			}
+			jr.endArray();
+			fr.close();
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return c;
 	}
 
 	public void importData(String filename){

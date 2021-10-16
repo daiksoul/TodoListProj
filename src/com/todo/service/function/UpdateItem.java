@@ -22,7 +22,7 @@ public class UpdateItem extends TodoFunction{
         int index = sc.nextInt();
 
         if(index<=0||index>l.getMaxId()){
-            System.out.println("1과 "+l.getMaxId()+"사이의 숫자를 입력해주세요.");
+            System.out.println(l.getMinId()+" ~ "+l.getMaxId()+"사이의 숫자를 입력해주세요.");
             return Result.OUT_OF_BOUND;
         }
         if(l.getById(index)==null)
