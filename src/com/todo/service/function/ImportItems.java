@@ -22,7 +22,7 @@ public class ImportItems extends TodoFunction{
         File file = new File(fname);
         if(!file.exists())
             return Result.FILE_NOT_FOUND;
-        l.importJson(fname);
+        System.out.println(l.importJson(fname)+"개 항목을 불러왔습니다.");
         return Result.SUCCESS;
     }
 }

@@ -59,7 +59,7 @@ public class TodoList {
 	}
 
 	public int deleteItem(int... ids) {
-		String sql = "delete from list where id = ?";
+		String sql = "delete from list where ";
 		String[] strs = new String[ids.length];
 		for (int i = 0; i < ids.length; i++)
 			strs[i] = "id = " + ids[i];

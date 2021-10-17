@@ -14,6 +14,6 @@ public class ListNameAsc extends ListList {
 
     @Override
     public List<TodoItem> sort(TodoList l) {
-        return l.getOrderedList("name",0);
+        return l.getOrderedList("title",0);
     }
 }

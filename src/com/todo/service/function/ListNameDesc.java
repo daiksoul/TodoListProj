@@ -14,6 +14,6 @@ public class ListNameDesc extends ListList{
 
     @Override
     public List<TodoItem> sort(TodoList l) {
-        return l.getOrderedList("name",1);
+        return l.getOrderedList("title",1);
     }
 }

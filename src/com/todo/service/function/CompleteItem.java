@@ -14,7 +14,6 @@ public class CompleteItem extends TodoFunction{
 
     @Override
     public Result run(TodoList l) {
-        int index;
         Scanner sc = new Scanner(System.in);
         System.out.print("\n"
                 + "========== 항목 완료\n"
